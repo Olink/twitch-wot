@@ -6,6 +6,8 @@ var swig = require('swig');
 
 var path = require('path')
 
+var twitch_query = require('./twitch_query');
+
 app.engine('.html', cons.swig);
 app.set('view engine', 'html');
 
@@ -24,7 +26,14 @@ app.use(express.session({secret:'thisisoursecret'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
-	res.render('test.html');
+	var tq = new twitch_query();
+	tq.get_streamers(function(json_obj){
+		for(var s in json_obj) {
+			console.log(s);
+		}
+		res.render('test.html', {streamers : json_obj});
+	});
+	
 });
 
 var port = process.env.PORT || 5000;

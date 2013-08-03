@@ -5,6 +5,9 @@
     <title>test</title>
   </head>
   <body>
-    bleh
+    {% for item in streamers -%}
+      {{ item.name }} is playing {{ item.game }} with {{ item.viewers }} viewers.
+        </br>Title: {{ item.title }} </br></br>
+    {%- endfor %}
   </body>
 </html>
