@@ -28,9 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
 	var tq = new twitch_query();
 	tq.get_streamers(function(json_obj){
-		for(var s in json_obj) {
-			console.log(s);
-		}
 		res.render('test.html', {streamers : json_obj});
 	});
 	
