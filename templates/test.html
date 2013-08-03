@@ -7,7 +7,22 @@
   <body>
     {% for item in streamers -%}
       {{ item.name }} is playing {{ item.game }} with {{ item.viewers }} viewers.
-        </br>Title: {{ item.title }} </br></br>
+          </br>Title: {{ item.title }}
+      {% if loop.index < 4 %}
+        </br>
+        <object type="application/x-shockwave-flash" 
+          height="400" 
+          width="600" 
+          id="live_embed_player_flash" 
+          data="http://www.twitch.tv/widgets/live_embed_player.swf?channel={{ item.name }}" bgcolor="#000000">
+          <param  name="allowFullScreen" value="true" />
+          <param  name="allowScriptAccess" value="always" />
+          <param  name="allowNetworking" value="all" />
+          <param  name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+          <param  name="flashvars" value="hostname=www.twitch.tv&channel={{ item.name }}&auto_play=false&start_volume=0" />
+        </object>
+      {% endif %}
+      </br></br>
     {%- endfor %}
   </body>
 </html>
