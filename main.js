@@ -27,5 +27,7 @@ app.get('/', function(req, res) {
 	res.render('test.html');
 });
 
-console.log("Starting server on *:62378");
-app.listen(7778);
+var port = process.env.PORT || 5000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
